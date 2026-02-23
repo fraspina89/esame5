@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Esame 5</title>
+
+    <!-- Foglio di stile principale compilato da SCSS -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <!-- HEADER: navbar e menu offcanvas
+      - Contiene il brand (logo), il bottone per aprire l'offcanvas e i link principali
+      - Il menu collapsable usa l'offcanvas di Bootstrap per dispositivi piccoli
+    -->
+    <header class="bg-dark">
+        <!-- Inizio navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#" title="Mio Logo">
+                    <img src="img/logo.jpg" alt="Logo" class="d-inline-block align-text-top logo-img"
+                        style="height:48px;">
+                </a>
+
+                <!-- Bottone sandwitch che appare quando il menu collassa-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Offcanvas -->
+                <div class="offcanvas offcanvas-start site-offcanvas" tabindex="-1" id="navbarOffcanvas"
+                    aria-labelledby="offcanvasLabel">
+                    <div class="offcanvas-header bg-warning">
+                        <h5 class="offcanvas-title" id="offcanvasLabel">Menu</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" title="Vai alla Home page">Registrazione</a>
+                            </li>
+
+
+                        </ul>
+
+                        <!-- ricerca piccola + bottone Accedi, allineati a destra -->
+                        <div class="d-flex ms-auto align-items-center">
+                            <form class="d-flex align-items-center me-2" role="search" onsubmit="return false;">
+                                <input class="form-control form-control-sm search-input" type="search"
+                                    placeholder="cerca" aria-label="cerca" style="width:180px;">
+                                <button class="btn btn-sm btn-search ms-2" type="submit" title="cerca">
+                                    <span class="visually-hidden">cerca</span>
+                                    🔍
+                                </button>
+                            </form>
+                            <a class="btn btn-danger" href="#" role="button" title="Registrati">Accedi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Fine navbar -->
+    </header>
+
+    <!-- MAIN: area principale della pagina
+      - include la sezione hero con la card di registrazione
+      - la struttura usa container / row / col di Bootstrap per il layout responsive
+    -->
+    <main>
+        <section class="hero d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card card-registrazione mx-auto" style="max-width:720px;">
+                            <div class="card-body p-4">
+                                <h3 class="card-title text-center mb-3">
+                                    <span class="line1">Un mondo di intrattenimento con</span>
+                                    <span class="line2">un semplice click</span>
+                                </h3>
+
+                                <!-- FORM DI REGISTRAZIONE
+                    - id="registerForm" è usato dal modulo TypeScript (dist/register.js)
+                    - `novalidate` rimuove la validazione del browser per usare il validator custom
+                  -->
+                                <form id="registerForm" novalidate>
+                                    <div class="mb-3 text-center">
+                                        <p class="form-label d-block text-center mb-2">
+                                            Inserisci qui i tuoi dati ed iscriviti a
+                                            <img src="img/logo.jpg" alt="Logo"
+                                                class="d-inline-block align-text-top label-logo ms-2">
+                                        </p>
+                                    </div>
+                                    <!-- Grid dei campi del form: due colonne su md+ e singola colonna su xs -->
+                                    <div class="row g-3">
+                                        <!-- Dati anagrafici -->
+                                        <div class="col-12 col-md-6">
+                                            <div class="mb-2 field-with-star">
+                                                <label for="firstName" class="form-label visually-hidden">Nome</label>
+                                                <input type="text" id="firstName" name="firstName"
+                                                    data-field="firstName" class="form-control" placeholder="Nome *"
+                                                    required>
+                                                <div class="invalid-feedback">Il nome è obbligatorio.</div>
+                                            </div>
+                                            <div class="mb-2 field-with-star">
+                                                <label for="lastName" class="form-label visually-hidden">Cognome</label>
+                                                <input type="text" id="lastName" name="lastName" data-field="lastName"
+                                                    class="form-control" placeholder="Cognome *" required>
+                                                <div class="invalid-feedback">Il cognome è obbligatorio.</div>
+                                            </div>
+                                            <div class="mb-2 field-with-star">
+                                                <label for="email" class="form-label visually-hidden">Email</label>
+                                                <input type="email" id="email" name="email" data-field="email"
+                                                    class="form-control" placeholder="nome@esempio.com *" required>
+                                                <div class="invalid-feedback">Inserisci una email valida.</div>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="phone" class="form-label visually-hidden">Telefono</label>
+                                                <input type="tel" id="phone" name="phone" data-field="phone"
+                                                    class="form-control" placeholder="Telefono">
+                                                <div class="invalid-feedback">Formato telefono non valido.</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Residenza + password -->
+                                        <div class="col-12 col-md-6">
+                                            <div class="mb-2 field-with-star">
+                                                <label for="street" class="form-label visually-hidden">Via /
+                                                    Indirizzo</label>
+                                                <input type="text" id="street" name="address.street"
+                                                    data-field="address.street" class="form-control"
+                                                    placeholder="Via / Indirizzo *" required>
+                                                <div class="invalid-feedback">Indirizzo obbligatorio.</div>
+                                            </div>
+
+                                            <div class="row g-2 mb-2">
+                                                <div class="col-6">
+                                                    <label for="city" class="form-label visually-hidden">Città</label>
+                                                    <div class="field-with-star">
+                                                        <input type="text" id="city" name="address.city"
+                                                            data-field="address.city" class="form-control"
+                                                            placeholder="Città *" required>
+                                                    </div>
+                                                    <div class="invalid-feedback">Inserisci la città.</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="zip" class="form-label visually-hidden">CAP</label>
+                                                    <input type="text" id="zip" name="address.zip"
+                                                        data-field="address.zip" class="form-control" pattern="[0-9]{5}"
+                                                        placeholder="CAP">
+                                                    <div class="invalid-feedback">CAP non valido.</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="province"
+                                                        class="form-label visually-hidden">Prov.</label>
+                                                    <input type="text" id="province" name="address.province"
+                                                        data-field="address.province" class="form-control"
+                                                        placeholder="Prov.">
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2 field-with-star">
+                                                <label for="password"
+                                                    class="form-label visually-hidden">Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" id="password" name="password"
+                                                        data-field="password" class="form-control"
+                                                        placeholder="Password *" minlength="8" required>
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        id="togglePwd">Mostra</button>
+                                                </div>
+
+                                                <div class="invalid-feedback">La password deve avere almeno 8 caratteri,
+                                                    contenere almeno una lettera maiuscola e un numero.</div>
+                                            </div>
+
+                                            <div class="mb-2 field-with-star">
+                                                <label for="confirmPassword" class="form-label visually-hidden">Conferma
+                                                    Password</label>
+                                                <input type="password" id="confirmPassword" name="confirmPassword"
+                                                    data-field="confirmPassword" class="form-control"
+                                                    placeholder="Conferma Password *" required>
+                                                <div class="invalid-feedback">Le password non coincidono.</div>
+                                            </div>
+
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="acceptTerms"
+                                                    name="acceptTerms" data-field="acceptTerms" required>
+                                                <label class="form-check-label" for="acceptTerms">Accetto i termini e le
+                                                    condizioni <span class="text-danger">*</span></label>
+                                                <div class="invalid-feedback">Devi accettare i termini.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <small class="text-muted">I campi contrassegnati sono obbligatori.</small>
+                                        <button type="submit" class="btn btn-danger"
+                                            id="btnRegister">Registrati</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione anteprime / griglia
+         - Griglia responsive di cards con effetto hover
+         - Le card caricano i video al volo via JS (source ha `data-src`)
+    -->
+        <div class="container">
+            <h3 class="section-title"><span class="text-danger">I</span> titoli del <span
+                    class="text-danger">Momento</span> </h3>
+            <div
+                class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-5 g-3 justify-content-center">
+                <!-- esempio card: la source ha data-src, JS la caricherà al hover/touch -->
+                <div class="col">
+                    <div class="card card-hover">
+                        <div class="media-wrap">
+                            <img src="img/comico.jpg" class="thumb" alt="thumb">
+                            <video class="card-video" muted playsinline preload="none" loop>
+                                <source data-src="video/comico.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="hover-desc">Breve descrizione del film.</div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-hover">
+                        <div class="media-wrap">
+                            <img src="img/commedia.jpg" class="thumb" alt="thumb">
+                            <video class="card-video" muted playsinline preload="none" loop>
+                                <source data-src="video/commedia.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="hover-desc">Breve descrizione del film.</div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-hover">
+                        <div class="media-wrap">
+                            <img src="img/drammatico.jpg" class="thumb" alt="thumb">
+                            <video class="card-video" muted playsinline preload="none" loop>
+                                <source data-src="video/drammatico.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="hover-desc">Breve descrizione del film.</div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-hover">
+                        <div class="media-wrap">
+                            <img src="img/commedia.jpg" class="thumb" alt="thumb">
+                            <video class="card-video" muted playsinline preload="none" loop>
+                                <source data-src="video/commedia.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="hover-desc">Breve descrizione del film.</div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-hover">
+                        <div class="media-wrap">
+                            <img src="img/horror.jpg" class="thumb" alt="thumb">
+                            <video class="card-video" muted playsinline preload="none" loop>
+                                <source data-src="video/horror.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <div class="hover-desc">Breve descrizione del film.</div>
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER: informazioni di contatto e link utili -->
+    <footer class="site-footer mt-0">
+        <div class="container py-4">
+            <div class="row align-items-start">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+
+                    <p class="mb-0 small">Breve descrizione o slogan</p>
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Contatti</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <p class="mb-1 small">Contatti</p>
+                    <p class="mb-0 small">email@example.com</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-3 small">© 2026 <span class="text-danger">CO</span>DE</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script di terze parti: Popper + Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+
+    <script type="module" src="dist/register.js"></script>
+        <script>
+        // Script inline: comportamento delle anteprime (zoom su hover / touch)
+        // - Le funzionalità principali (validazione e submit) sono in `dist/register.js`
+
+        // Zoom immagine su hover / touch (JS)
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.card-hover').forEach(function (card) {
+                const img = card.querySelector('.thumb');
+                if (!img) return;
+
+                function addZoom() {
+                    img.classList.add('zoom');
+                    card.classList.add('zooming');
+                }
+                function removeZoom() {
+                    img.classList.remove('zoom');
+                    card.classList.remove('zooming');
+                }
+
+                // mouse
+                card.addEventListener('mouseenter', addZoom);
+                card.addEventListener('mouseleave', removeZoom);
+
+                // touch: toggle zoom on tap
+                card.addEventListener('touchstart', function (e) {
+                    if (img.classList.contains('zoom')) removeZoom(); else addZoom();
+                }, { passive: true });
+            });
+        });
+        </script>
+
+    <!-- Toast di conferma registrazione -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+        <div id="registerSuccessToast" class="toast align-items-center text-bg-success border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">Registrazione completata con successo!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Chiudi"></button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

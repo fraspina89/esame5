@@ -1,0 +1,520 @@
+
+/* ==================================================
+   Spazio tra contenuto e footer
+   - `main` riceve un margin-bottom per creare distanza
+   - utile quando il footer è posizionato in modo normale
+   ================================================== */
+main {
+  margin-bottom: 3rem;
+}
+
+/* ==================================================
+   Sfondo globale
+   - Impostiamo il background principale dell'intera pagina
+   - Usare la variabile `$bg` permette di cambiare tema facilmente
+   ================================================== */
+html,
+body {
+  background-color: #000;
+}
+
+/* alternativa: se footer è position: fixed, aggiungi bottom padding al body */
+body.has-fixed-footer {
+  padding-bottom: 4rem;
+}
+
+/* ----------------------
+    Navbar / Offcanvas - ricerca e bottoni
+    Regole per gli elementi di ricerca e per i pulsanti nella navbar/offcanvas
+    Utilizza variabili per colori, padding e hover
+    ---------------------- */
+.navbar .search-input,
+.offcanvas-body .search-input {
+  background-color: #050505;
+  background-image: none;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  mix-blend-mode: normal;
+  opacity: 1;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.25rem;
+  width: 180px;
+  height: auto;
+}
+.navbar .search-input::placeholder,
+.offcanvas-body .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.navbar .search-input:focus,
+.offcanvas-body .search-input:focus {
+  box-shadow: none;
+  outline: none;
+}
+.navbar .btn-search,
+.offcanvas-body .btn-search {
+  background: transparent;
+  color: #e9ecef;
+  border: none;
+  box-shadow: none;
+  padding: 0 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  appearance: none;
+}
+.navbar .btn-search:hover,
+.offcanvas-body .btn-search:hover {
+  background: transparent;
+  color: #ff6b6b;
+}
+.navbar .btn-search:focus, .navbar .btn-search:active,
+.offcanvas-body .btn-search:focus,
+.offcanvas-body .btn-search:active {
+  box-shadow: none;
+  outline: none;
+}
+
+/* rimuove bordi dei form all'interno dell'offcanvas */
+header.bg-dark .offcanvas-body .form-control,
+header.bg-dark .offcanvas-body .btn {
+  border: none;
+  box-shadow: none;
+}
+
+/* Forza sfondo completamente nero per navbar e offcanvas  */
+header.bg-dark .navbar,
+header.bg-dark .site-offcanvas,
+header.bg-dark .site-offcanvas .offcanvas-body,
+header.bg-dark .site-offcanvas .offcanvas-header,
+header.bg-dark .dropdown-menu {
+  background-color: #000;
+  color: #e9ecef;
+  border: none;
+  box-shadow: none;
+}
+
+/* assicurarsi che link e brand ereditino colore chiaro all'interno dell'offcanvas */
+header.bg-dark .offcanvas .navbar-brand,
+header.bg-dark .offcanvas .nav-link,
+header.bg-dark .offcanvas .dropdown-item {
+  color: #e9ecef;
+}
+
+/* ==================================================
+    Hero / sezione introduttiva
+    - Sfondo con immagine e overlay per migliorare leggibilità
+    - Imposta min-height per occupare la viewport meno l'header
+    ================================================== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1rem 2rem;
+  /* più spazio sopra per staccare dalla navbar */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.55)), url("../img/sfondo1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 140px);
+}
+
+/* maggiore distanza tra form/hero e il container successivo */
+section.hero + .container {
+  margin-top: 4rem;
+}
+
+.label-logo {
+  height: 20px;
+  /* regolazione */
+  width: auto;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  filter: brightness(1.6);
+}
+
+.logo-img {
+  background-color: transparent;
+  filter: brightness(0.95) contrast(1.02);
+}
+
+.logo-outline {
+  filter: grayscale(1) contrast(1.2) brightness(0.12);
+  mix-blend-mode: multiply;
+}
+
+/* Paragrafo di invito: (stile semplice) */
+/* --------------------------------------------------
+    Card registrazione
+    - Contenitore centrale che ospita il form di registrazione
+    - Include stili per input, form-floating, titoli e decorazioni
+    - Mantiene contrasto elevato per leggibilità su sfondo scuro
+    -------------------------------------------------- */
+.card-registrazione {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  overflow: visible;
+  margin: 0 auto;
+  min-height: 180px;
+}
+.card-registrazione .form-control {
+  background-color: #1f2123;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  padding: 0.28rem 0.45rem;
+  border-radius: 0.25rem;
+  height: auto;
+  font-size: 0.95rem;
+}
+.card-registrazione .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.card-registrazione .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #222426;
+  color: #fff;
+}
+.card-registrazione .form-control.is-invalid {
+  border: 1px solid var(--bs-danger);
+  box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.12);
+  background-color: #2b2121;
+}
+.card-registrazione .form-check-label {
+  color: #ddd;
+}
+.card-registrazione .form-floating {
+  position: relative;
+}
+.card-registrazione .form-floating .form-control {
+  padding: 1.15rem 0.6rem 0.45rem;
+  height: auto;
+}
+.card-registrazione .form-floating label {
+  z-index: 2;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding-left: 0.15rem;
+}
+.card-registrazione .form-floating .input-group .form-control {
+  padding-right: 0.6rem;
+}
+.card-registrazione .form-floating .form-control:focus ~ label,
+.card-registrazione .form-floating .form-control:not(:placeholder-shown) ~ label {
+  color: rgba(255, 255, 255, 0.85);
+}
+.card-registrazione .card-body {
+  padding: 0.6rem;
+}
+.card-registrazione .card-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.card-registrazione .card-title .line1 {
+  display: block;
+  font-size: 1.15rem;
+  line-height: 1.05;
+}
+.card-registrazione .card-title .line2 {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+.card-registrazione::before {
+  left: -18px;
+}
+.card-registrazione::after {
+  right: -18px;
+}
+.card-registrazione::before, .card-registrazione::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/*  asterisco (campo obbligatorio)
+     - `.field-with-star` posiziona visivamente un asterisco all'interno dell'input
+     - Supporta variante `star-left` per posizionare l'asterisco a sinistra
+ */
+.field-with-star {
+  position: relative;
+}
+
+.field-with-star .form-control {
+  padding-right: 2.25rem;
+}
+
+.field-with-star.star-left .form-control {
+  padding-left: 2.25rem;
+  padding-right: 0.6rem;
+}
+
+.field-with-star .input-star {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1rem;
+  line-height: 1;
+  color: #dc3545;
+}
+
+.field-with-star.star-left .input-star {
+  left: 0.75rem;
+  right: auto;
+}
+
+/* quando c'è un input-group (es. bottone Mostra) sposta l'asterisco a sinistra del bottone */
+.field-with-star .input-group {
+  position: relative;
+}
+
+.field-with-star .input-group .form-control {
+  padding-right: 3.75rem;
+}
+
+.field-with-star .input-group + .input-star,
+.field-with-star .input-group ~ .input-star {
+  right: 3.5rem;
+}
+
+/* Fix per form-floating: evitare sovrapposizioni etichetta/placeholder */
+.card-registrazione .form-floating {
+  position: relative;
+}
+
+.card-registrazione .form-floating .form-control {
+  padding: 1.15rem 0.6rem 0.45rem;
+  /* spazio superiore per etichetta flottante */
+  height: auto;
+}
+
+.card-registrazione .form-floating label {
+  z-index: 2;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding-left: 0.15rem;
+}
+
+.card-registrazione .form-floating .input-group .form-control {
+  padding-right: 0.6rem;
+  /* lascia spazio per il bottone */
+}
+
+.card-registrazione .form-floating .form-control:focus ~ label,
+.card-registrazione .form-floating .form-control:not(:placeholder-shown) ~ label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.card-registrazione .card-body {
+  padding: 0.6rem;
+}
+
+.card-registrazione .card-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.card-registrazione::before {
+  left: -18px;
+}
+
+.card-registrazione::after {
+  right: -18px;
+}
+
+/* titolo su due righe e più grande */
+.card-registrazione .card-title .line1 {
+  display: block;
+  font-size: 1.15rem;
+  line-height: 1.05;
+}
+
+.card-registrazione .card-title .line2 {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+/* spazio tra il titolo della sezione e le card successive */
+.section-title {
+  margin-bottom: 0.6rem;
+  color: #fff;
+}
+
+.section-title + .row {
+  margin-top: 0.5rem;
+}
+
+.card-registrazione::before,
+.card-registrazione::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  /* regola opacità/colore */
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --------------------------------------------------
+   Sezione CARDS
+   - regola il layout delle cards di anteprima
+   - Usata per griglie responsive con varie colonne a seconda della viewport
+   - sono funzionabili con le utility di bootstrap
+   -------------------------------------------------- */
+/* CARDS / HOVER PREVIEW (CSS + JS) */
+.row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-5.g-3 {
+  align-items: stretch;
+}
+
+.row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-5.g-3 {
+  align-items: stretch;
+}
+.row .col > .card {
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: #e9ecef;
+}
+
+/* --------------------------------------------------
+   .card-hover
+   - Effetto hover che ingrandisce la card e mostra descrizione/video
+   - Le transizioni sono sui trasform e sulle proprietà di altezza/opacità
+   - La classe `.playing` è usata da JS per attivare lo stato video
+   -------------------------------------------------- */
+.card-hover {
+  position: relative;
+  overflow: visible;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transform-origin: center top;
+}
+.card-hover .media-wrap {
+  overflow: hidden;
+  display: block;
+  transition: max-height 0.28s ease;
+  max-height: 160px;
+}
+.card-hover .thumb {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  transition: transform 0.28s ease, opacity 0.18s ease;
+  transform-origin: center center;
+  transform: scale(1);
+}
+.card-hover .thumb.zoom {
+  transform: scale(1.08);
+}
+.card-hover video.card-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 0;
+  opacity: 0;
+  object-fit: cover;
+  transition: max-height 0.28s ease, opacity 0.28s ease;
+}
+.card-hover .hover-desc {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  transition: max-height 0.28s ease, opacity 0.22s ease;
+}
+.card-hover:hover {
+  transform: scale(1.06);
+  z-index: 40;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+.card-hover:hover .media-wrap {
+  max-height: 260px;
+}
+.card-hover:hover .thumb {
+  transform: scale(1.08);
+}
+.card-hover:hover video.card-video {
+  max-height: 0;
+  opacity: 0;
+}
+.card-hover:hover .hover-desc {
+  max-height: 120px;
+  opacity: 1;
+}
+.card-hover.playing .media-wrap {
+  max-height: 260px;
+}
+.card-hover.playing .thumb {
+  opacity: 0;
+}
+.card-hover.playing video.card-video {
+  max-height: 260px;
+  opacity: 1;
+}
+.card-hover.playing .hover-desc {
+  max-height: 120px;
+  opacity: 1;
+}
+
+.site-footer {
+  background: #000;
+  color: #e9ecef;
+  border-top: none;
+  /* Footer: organizzazione link e branding
+     - link in hover diventano bianchi
+     - `.footer-logo` controlla la dimensione del logo nel footer
+  */
+}
+.site-footer a {
+  color: #e9ecef;
+  text-decoration: none;
+}
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.site-footer .footer-logo {
+  height: 48px;
+  width: auto;
+  filter: brightness(1.2);
+}
+.site-footer .list-unstyled li {
+  margin-bottom: 0.45rem;
+}
+.site-footer .small {
+  color: #cfcfcf;
+}

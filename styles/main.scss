@@ -1,0 +1,612 @@
+
+// Variabili principali
+$bg: #000;
+$bg-alt: #050505;
+$text: #e9ecef;
+$text-muted: #cfcfcf;
+$danger: #dc3545;
+$card-bg: #000;
+$card-border: rgba(255, 255, 255, 0.06);
+$overlay-gradient: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.55));
+
+// Palette 
+$white: #fff;
+$white-60: rgba(255, 255, 255, 0.6);
+$white-75: rgba(255, 255, 255, 0.75);
+$white-85: rgba(255, 255, 255, 0.85);
+$white-12: rgba(255, 255, 255, 0.12);
+$white-04: rgba(255, 255, 255, 0.04);
+$muted-light: #ddd;
+$card-input-bg: #1f2123;
+$card-input-focus: #222426;
+$card-input-invalid-bg: #2b2121;
+$accent: #ff6b6b;
+$shadow-md: rgba(0, 0, 0, 0.4);
+$shadow-lg: rgba(0, 0, 0, 0.45);
+$overlay-dark: rgba(0, 0, 0, 0.75);
+$danger-shadow: rgba(220, 53, 69, 0.12);
+
+
+/* ==================================================
+   Spazio tra contenuto e footer
+   - `main` riceve un margin-bottom per creare distanza
+   - utile quando il footer è posizionato in modo normale
+   ================================================== */
+main {
+    margin-bottom: 3rem;
+}
+
+/* ==================================================
+   Sfondo globale
+   - Impostiamo il background principale dell'intera pagina
+   - Usare la variabile `$bg` permette di cambiare tema facilmente
+   ================================================== */
+html,
+body {
+    background-color: $bg;
+}
+
+/* alternativa: se footer è position: fixed, aggiungi bottom padding al body */
+body.has-fixed-footer {
+    padding-bottom: 4rem;
+}
+
+/* ----------------------
+    Navbar / Offcanvas - ricerca e bottoni
+    Regole per gli elementi di ricerca e per i pulsanti nella navbar/offcanvas
+    Utilizza variabili per colori, padding e hover
+    ---------------------- */
+.navbar,
+.offcanvas-body {
+    .search-input {
+        background-color: $bg-alt;
+        background-image: none;
+        color: $white;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+        mix-blend-mode: normal;
+        opacity: 1;
+        padding: .35rem .6rem;
+        border-radius: .25rem;
+        width: 180px;
+        height: auto;
+
+        &::placeholder {
+            color: $white-60;
+        }
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .btn-search {
+        background: transparent;
+        color: $text;
+        border: none;
+        box-shadow: none;
+        padding: 0 .25rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        line-height: 1;
+        appearance: none;
+
+        &:hover {
+            background: transparent;
+            color: $accent;
+        }
+
+        &:focus,
+        &:active {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+}
+
+/* rimuove bordi dei form all'interno dell'offcanvas */
+header.bg-dark .offcanvas-body .form-control,
+header.bg-dark .offcanvas-body .btn {
+    border: none;
+    box-shadow: none;
+}
+
+/* Forza sfondo completamente nero per navbar e offcanvas  */
+header.bg-dark .navbar,
+header.bg-dark .site-offcanvas,
+header.bg-dark .site-offcanvas .offcanvas-body,
+header.bg-dark .site-offcanvas .offcanvas-header,
+header.bg-dark .dropdown-menu {
+    background-color: $bg;
+    color: $text;
+    border: none;
+    box-shadow: none;
+}
+
+/* assicurarsi che link e brand ereditino colore chiaro all'interno dell'offcanvas */
+header.bg-dark .offcanvas .navbar-brand,
+header.bg-dark .offcanvas .nav-link,
+header.bg-dark .offcanvas .dropdown-item {
+    color: $text;
+}
+
+/* ==================================================
+    Hero / sezione introduttiva
+    - Sfondo con immagine e overlay per migliorare leggibilità
+    - Imposta min-height per occupare la viewport meno l'header
+    ================================================== */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1rem 2rem;
+    /* più spazio sopra per staccare dalla navbar */
+    background-image: $overlay-gradient, url('../img/sfondo1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 140px);
+}
+
+/* maggiore distanza tra form/hero e il container successivo */
+section.hero+.container {
+    margin-top: 4rem;
+}
+
+// Logo piccolo usato accanto al brand o come icona nel form
+.label-logo {
+    height: 20px;
+    /* regolazione */
+    width: auto;
+    vertical-align: middle;
+    margin-left: .4rem;
+    filter: brightness(1.6);
+}
+
+// Variante logo: versione non troppo scura (regola luminosità/contrasto)
+.logo-img {
+    background-color: transparent;
+    filter: brightness(0.95) contrast(1.02);
+}
+
+// Outline 
+.logo-outline {
+    filter: grayscale(1) contrast(1.2) brightness(0.12);
+    mix-blend-mode: multiply;
+}
+
+/* Paragrafo di invito: (stile semplice) */
+
+/* --------------------------------------------------
+    Card registrazione
+    - Contenitore centrale che ospita il form di registrazione
+    - Include stili per input, form-floating, titoli e decorazioni
+    - Mantiene contrasto elevato per leggibilità su sfondo scuro
+    -------------------------------------------------- */
+.card-registrazione {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    width: 100%;
+    background: $card-bg;
+    color: $white;
+    border-radius: 0.75rem;
+    border: 1px solid $card-border;
+    box-shadow: 0 12px 24px $shadow-md;
+    overflow: visible;
+    margin: 0 auto;
+    min-height: 180px;
+
+    // campi form: stile simile alla search-input nella navbar
+    // Stile base per gli input all'interno della card
+    // - usa sfondo scuro, placeholder meno evidente e bordo rimosso
+    .form-control {
+        background-color: $card-input-bg;
+        color: $white;
+        border: none;
+        box-shadow: none;
+        padding: .28rem .45rem;
+        border-radius: .25rem;
+        height: auto;
+        font-size: .95rem;
+
+        &::placeholder {
+            color: $white-60;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            background-color: $card-input-focus;
+            color: $white;
+        }
+
+        &.is-invalid {
+            border: 1px solid var(--bs-danger);
+            box-shadow: 0 0 0 .15rem $danger-shadow;
+            background-color: $card-input-invalid-bg;
+        }
+    }
+
+    .form-check-label {
+        color: $muted-light;
+    }
+
+    // Contesto form-floating: etichette che galleggiano sopra l'input
+    .form-floating {
+        position: relative;
+
+        .form-control {
+            padding: 1.15rem .6rem .45rem;
+            height: auto;
+        }
+
+        label {
+            z-index: 2;
+            pointer-events: none;
+            color: $white-75;
+            padding-left: .15rem;
+        }
+
+        // Quando l'input è in un input-group, aggiunge padding laterale
+        .input-group .form-control {
+            padding-right: .6rem;
+        }
+
+        .form-control:focus~label,
+        .form-control:not(:placeholder-shown)~label {
+            color: $white-85;
+        }
+    }
+
+    .card-body {
+        padding: 0.6rem;
+    }
+
+    .card-title {
+        color: $white;
+        font-weight: 600;
+        font-size: 1.25rem;
+
+        .line1 {
+            display: block;
+            font-size: 1.15rem;
+            line-height: 1.05;
+        }
+
+        .line2 {
+            display: block;
+            font-size: 0.98rem;
+            font-weight: 700;
+            margin-top: 0.15rem;
+        }
+    }
+
+    &::before {
+        left: -18px;
+    }
+
+    &::after {
+        right: -18px;
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 12px;
+        bottom: 12px;
+        width: 2px;
+        background: $white-12;
+        border-radius: 2px;
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+/*  asterisco (campo obbligatorio)
+     - `.field-with-star` posiziona visivamente un asterisco all'interno dell'input
+     - Supporta variante `star-left` per posizionare l'asterisco a sinistra
+ */
+.field-with-star {
+    position: relative;
+}
+
+.field-with-star .form-control {
+    padding-right: 2.25rem;
+}
+
+.field-with-star.star-left .form-control {
+    padding-left: 2.25rem;
+    padding-right: .6rem;
+}
+
+// Icona asterisco posizionata assolutamente dentro il campo
+.field-with-star .input-star {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; // non cliccabile
+    font-size: 1rem;
+    line-height: 1;
+    color: $danger; // usa colore danger per evidenziare
+}
+
+.field-with-star.star-left .input-star {
+    left: .75rem;
+    right: auto;
+}
+
+/* quando c'è un input-group (es. bottone Mostra) sposta l'asterisco a sinistra del bottone */
+.field-with-star .input-group {
+    position: relative;
+}
+
+.field-with-star .input-group .form-control {
+    padding-right: 3.75rem;
+}
+
+.field-with-star .input-group+.input-star,
+.field-with-star .input-group~.input-star {
+    right: 3.5rem;
+}
+
+/* Fix per form-floating: evitare sovrapposizioni etichetta/placeholder */
+.card-registrazione .form-floating {
+    position: relative;
+}
+
+.card-registrazione .form-floating .form-control {
+    padding: 1.15rem .6rem .45rem;
+    /* spazio superiore per etichetta flottante */
+    height: auto;
+}
+
+.card-registrazione .form-floating label {
+    z-index: 2;
+    pointer-events: none;
+    color: $white-75;
+    padding-left: .15rem;
+}
+
+.card-registrazione .form-floating .input-group .form-control {
+    padding-right: .6rem;
+    /* lascia spazio per il bottone */
+}
+
+.card-registrazione .form-floating .form-control:focus~label,
+.card-registrazione .form-floating .form-control:not(:placeholder-shown)~label {
+    color: $white-85;
+}
+
+.card-registrazione .card-body {
+    padding: 0.6rem;
+}
+
+.card-registrazione .card-title {
+    color: $white;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.card-registrazione::before {
+    left: -18px;
+}
+
+.card-registrazione::after {
+    right: -18px;
+}
+
+/* titolo su due righe e più grande */
+.card-registrazione .card-title .line1 {
+    display: block;
+    font-size: 1.15rem;
+    line-height: 1.05;
+}
+
+.card-registrazione .card-title .line2 {
+    display: block;
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-top: 0.15rem;
+}
+
+/* spazio tra il titolo della sezione e le card successive */
+.section-title {
+    margin-bottom: 0.6rem;
+    color: $white;
+}
+
+.section-title+.row {
+    margin-top: 0.5rem;
+}
+
+.card-registrazione::before,
+.card-registrazione::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: $white-12;
+    /* regola opacità/colore */
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --------------------------------------------------
+   Sezione CARDS
+   - regola il layout delle cards di anteprima
+   - Usata per griglie responsive con varie colonne a seconda della viewport
+   - sono funzionabili con le utility di bootstrap
+   -------------------------------------------------- */
+
+/* CARDS / HOVER PREVIEW (CSS + JS) */
+.row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-5.g-3 {
+    align-items: stretch;
+}
+
+.row {
+    &.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-5.g-3 {
+        align-items: stretch;
+    }
+
+    .col {
+        >.card {
+            display: block;
+            padding: 0;
+            overflow: hidden;
+            background: $bg;
+            border: 1px solid $white-04;
+            color: $text;
+        }
+    }
+}
+
+// --------------------------------------------------
+// Fine sezione griglia cards
+// --------------------------------------------------
+
+/* --------------------------------------------------
+   .card-hover
+   - Effetto hover che ingrandisce la card e mostra descrizione/video
+   - Le transizioni sono sui trasform e sulle proprietà di altezza/opacità
+   - La classe `.playing` è usata da JS per attivare lo stato video
+   -------------------------------------------------- */
+.card-hover {
+    position: relative;
+    overflow: visible;
+    transition: transform .22s ease, box-shadow .22s ease;
+    transform-origin: center top;
+
+    .media-wrap {
+        overflow: hidden;
+        display: block;
+        transition: max-height .28s ease;
+        max-height: 160px;
+    }
+
+    .thumb {
+        display: block;
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        transition: transform .28s ease, opacity .18s ease;
+        transform-origin: center center;
+        transform: scale(1);
+    }
+
+    .thumb.zoom {
+        transform: scale(1.08);
+    }
+
+    video.card-video {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 0;
+        opacity: 0;
+        object-fit: cover;
+        transition: max-height .28s ease, opacity .28s ease;
+    }
+
+    .hover-desc {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        background: $overlay-dark;
+        color: $white;
+        padding: .5rem;
+        font-size: .9rem;
+        transition: max-height .28s ease, opacity .22s ease;
+    }
+
+    &:hover {
+        transform: scale(1.06);
+        z-index: 40;
+        box-shadow: 0 20px 40px $shadow-lg;
+
+        .media-wrap {
+            max-height: 260px;
+        }
+
+        .thumb {
+            transform: scale(1.08);
+        }
+
+        video.card-video {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .hover-desc {
+            max-height: 120px;
+            opacity: 1;
+        }
+    }
+
+    &.playing {
+        .media-wrap {
+            max-height: 260px;
+        }
+
+        .thumb {
+            opacity: 0;
+        }
+
+        video.card-video {
+            max-height: 260px;
+            opacity: 1;
+        }
+
+        .hover-desc {
+            max-height: 120px;
+            opacity: 1;
+        }
+    }
+}
+
+.site-footer {
+    background: $bg;
+    color: $text;
+    border-top: none;
+
+    /* Footer: organizzazione link e branding
+       - link in hover diventano bianchi
+       - `.footer-logo` controlla la dimensione del logo nel footer
+    */
+
+    a {
+        color: $text;
+        text-decoration: none;
+
+        &:hover {
+            color: $white;
+            text-decoration: underline;
+        }
+    }
+
+    .footer-logo {
+        height: 48px;
+        width: auto;
+        filter: brightness(1.2);
+    }
+
+    .list-unstyled {
+        li {
+            margin-bottom: .45rem;
+        }
+    }
+
+    .small {
+        color: $text-muted;
+    }
+}
